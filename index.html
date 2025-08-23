@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Notepad - Free Online Text Editor | Notepad for Web</title>
+    <meta name="description" content="Free online Notepad text editor with all desktop features. Create, edit, and save text files directly in your browser. No installation needed.">
+    <meta name="keywords" content="online notepad,desktop like Notepad in mobile,web notepad, text editor, free notepad, online text editor, notepad web version, notepad online, free text editor, browser notepad, notepad app">
+    <meta name="author" content="Web Notepad">
+    <meta property="og:title" content="Web Notepad - Free Online Text Editor">
+    <meta property="og:description" content="Full-featured online Notepad with all desktop functionality. Works directly in your browser with no installation required.">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            padding: 1rem;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .notepad-app {
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .menu-bar {
+            background-color: #f0f0f0;
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .menu-item {
+            padding: 8px 15px;
+            cursor: pointer;
+            position: relative;
+            font-size: 14px;
+        }
+        
+        .menu-item:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 180px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border: 1px solid #ddd;
+            top: 100%;
+            left: 0;
+        }
+        
+        .dropdown-content div {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        
+        .dropdown-content div:hover {
+            background-color: #e9f2ff;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .editor-container {
+            display: flex;
+            height: 60vh;
+        }
+        
+        .editor {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            resize: none;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 15px;
+            line-height: 1.5;
+            outline: none;
+            border-right: 1px solid #eee;
+            height: 100%;
+            overflow: auto;
+        }
+        
+        .status-bar {
+            background-color: #f0f0f0;
+            padding: 5px 15px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .home-content {
+            padding: 20px;
+            line-height: 1.8;
+        }
+        
+        .home-content h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .home-content h3 {
+            color: #3498db;
+            margin: 20px 0 10px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .feature-card {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 400px;
+            max-width: 90%;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .close {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .modal-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .secondary {
+            background: #e0e0e0;
+        }
+        
+        .seo-content {
+            margin-top: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .seo-content h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .editor-container {
+                flex-direction: column;
+                height: 70vh;
+            }
+            
+            .editor {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .dropdown {
+                width: 100%;
+            }
+            
+            .dropdown-content {
+                width: 100%;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .breadcrumb {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i>📝</i> Web Notepad - Free Online Text Editor
+            </div>
+            <div>
+                <a href="#" class="btn" onclick="showHome()">Home</a>
+            </div>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="#">Home</a> > <a href="#">Online Tools</a> > <a href="#">Text Editors</a> > Web Notepad
+        </div>
+        
+        <div class="notepad-app">
+            <div class="menu-bar">
+                <div class="dropdown">
+                    <div class="menu-item">File</div>
+                    <div class="dropdown-content">
+                        <div onclick="newDocument()">New</div>
+                        <div onclick="newWindow()">New Window</div>
+                        <div onclick="openFile()">Open</div>
+                        <div onclick="saveFile()">Save</div>
+                        <div onclick="showModal('saveAsModal')">Save As</div>
+                        <div onclick="showModal('pageSetupModal')">Page Setup</div>
+                        <div onclick="printDocument()">Print</div>
+                        <div onclick="exit()">Exit</div>
+                    </div>
+                </div>
+                
+                <div class="dropdown">
+                    <div class="menu-item">Edit</div>
+                    <div class="dropdown-content">
+                        <div onclick="undo()">Undo</div>
+                        <div onclick="cut()">Cut</div>
+                        <div onclick="copy()">Copy</div>
+                        <div onclick="paste()">Paste</div>
+                        <div onclick="deleteText()">Delete</div>
+                        <div onclick="showModal('findModal')">Find</div>
+                        <div onclick="findNext()">Find Next</div>
+                        <div onclick="showModal('replaceModal')">Replace</div>
+                        <div onclick="showModal('goToModal')">Go To</div>
+                        <div onclick="selectAll()">Select All</div>
+                        <div onclick="insertDateTime()">Time/Date</div>
+                    </div>
+                </div>
+                
+                <div class="dropdown">
+                    <div class="menu-item">Format</div>
+                    <div class="dropdown-content">
+                        <div onclick="toggleWordWrap()">Word Wrap</div>
+                        <div onclick="showModal('fontModal')">Font</div>
+                    </div>
+                </div>
+                
+                <div class="dropdown">
+                    <div class="menu-item">View</div>
+                    <div class="dropdown-content">
+                        <div onclick="zoomIn()">Zoom In</div>
+                        <div onclick="zoomOut()">Zoom Out</div>
+                        <div onclick="zoomReset()">Restore Default Zoom</div>
+                        <div onclick="toggleStatusBar()">Status Bar</div>
+                    </div>
+                </div>
+                
+                <div class="dropdown">
+                    <div class="menu-item">Help</div>
+                    <div class="dropdown-content">
+                        <div onclick="showHelp()">View Help</div>
+                        <div onclick="showModal('feedbackModal')">Send Feedback</div>
+                        <div onclick="showModal('aboutModal')">About Notepad</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="editor-container">
+                <textarea class="editor" id="notepad" placeholder="Start typing here..."></textarea>
+            </div>
+            
+            <div class="status-bar" id="statusBar">
+                <div>Ln 1, Col 1</div>
+                <div>100%</div>
+                <div>Windows (CRLF)</div>
+                <div>UTF-8</div>
+            </div>
+        </div>
+        
+        <div class="home-content" id="homeContent">
+            <h2>Welcome to Web Notepad - Your Free Online Text Editor</h2>
+            <p>Web Notepad is a free, full-featured text editor that works directly in your web browser. It includes all the functionality of the classic Windows Notepad application, plus additional features that make it perfect for editing code, taking notes, or writing documents.</p>
+            
+            <h3>How to Use Web Notepad</h3>
+            <p>Getting started with Web Notepad is simple:</p>
+            <ol>
+                <li>Start typing in the main editor area</li>
+                <li>Use the menu options to access all Notepad features</li>
+                <li>Save your work directly to your computer</li>
+                <li>Open existing text files from your device</li>
+            </ol>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>File Operations</h3>
+                    <p>Create new documents, open existing files, save your work in various formats, and print documents directly from your browser.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Text Editing</h3>
+                    <p>Cut, copy, paste, find, replace, and use all the standard text editing features you expect from a professional text editor.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Formatting Options</h3>
+                    <p>Toggle word wrap, change fonts, adjust zoom levels, and customize your editing experience to suit your preferences.</p>
+                </div>
+            </div>
+            
+            <h3>Advanced Features</h3>
+            <p>Web Notepad also includes advanced features like:</p>
+            <ul>
+                <li>Multiple encoding support (ANSI, UTF-8, UTF-16)</li>
+                <li>Line ending conversion (Windows, Unix, Mac)</li>
+                <li>Go to specific line numbers</li>
+                <li>Insert current date/time with one click</li>
+                <li>Status bar with document statistics</li>
+            </ul>
+            
+            <a href="#" class="btn" onclick="hideHome()">Start Using Web Notepad</a>
+        </div>
+        
+        <div class="seo-content">
+            <h2>Web Notepad - Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is Web Notepad completely free to use?</div>
+                <p>Yes, Web Notepad is completely free. There are no hidden fees or subscription costs. You can use all features without any limitations.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Does Web Notepad work on mobile devices?</div>
+                <p>Yes, Web Notepad is fully responsive and works on smartphones, tablets, and desktop computers. The interface adjusts to fit your screen size.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I open and save files with Web Notepad?</div>
+                <p>Yes, you can open text files from your device and save your work directly to your computer. All processing happens in your browser for maximum privacy.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What file formats does Web Notepad support?</div>
+                <p>Web Notepad supports .txt, .html, .css, .js, .xml, .json, and many other text-based file formats. You can also save files with different encodings.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How does Web Notepad compare to desktop Notepad?</div>
+                <p>Web Notepad includes all the features of Windows Notepad plus additional functionality like zoom controls, multiple encodings, and a more modern interface.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Web Notepad &copy; 2023 - Free Online Text Editor | All Rights Reserved</p>
+            <p>This is a free service. No registration required. No data stored on our servers.</p>
+            <p>Web Notepad - Your free online text editor for quick notes, code editing, and document creation.</p>
+        </footer>
+    </div>
+    
+    <!-- Modals -->
+    <div class="modal" id="saveAsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Save As</h3>
+                <span class="close" onclick="closeModal('saveAsModal')">&times;</span>
+            </div>
+            <div>
+                <label for="fileName">File Name:</label>
+                <input type="text" id="fileName" value="document.txt">
+                
+                <label for="saveAsType">Save as type:</label>
+                <select id="saveAsType">
+                    <option>Text Documents (*.txt)</option>
+                    <option>All Files (*.*)</option>
+                    <option>HTML Documents (*.html, *.htm)</option>
+                    <option>CSS Files (*.css)</option>
+                    <option>JavaScript Files (*.js)</option>
+                    <option>XML Documents (*.xml)</option>
+                    <option>JSON Files (*.json)</option>
+                </select>
+                
+                <label for="encoding">Encoding:</label>
+                <select id="encoding">
+                    <option>ANSI</option>
+                    <option selected>UTF-8</option>
+                    <option>UTF-8 with BOM</option>
+                    <option>UTF-16 LE</option>
+                    <option>UTF-16 BE</option>
+                </select>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" onclick="closeModal('saveAsModal')">Cancel</button>
+                <button class="modal-btn primary" onclick="saveAsFile()">Save</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="findModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Find</h3>
+                <span class="close" onclick="closeModal('findModal')">&times;</span>
+            </div>
+            <div>
+                <label for="findText">Find what:</label>
+                <input type="text" id="findText">
+                
+                <div>
+                    <input type="checkbox" id="matchCase">
+                    <label for="matchCase">Match case</label>
+                </div>
+                
+                <div>
+                    <input type="radio" id="directionUp" name="direction">
+                    <label for="directionUp">Up</label>
+                    
+                    <input type="radio" id="directionDown" name="direction" checked>
+                    <label for="directionDown">Down</label>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" onclick="closeModal('findModal')">Cancel</button>
+                <button class="modal-btn primary" onclick="findText()">Find Next</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>About Web Notepad</h3>
+                <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+            </div>
+            <div>
+                <p>Web Notepad Version 1.0</p>
+                <p>A free online text editor with all the features of Windows Notepad.</p>
+                <p>This application runs entirely in your browser - no data is sent to any server.</p>
+                <p>&copy; 2023 Web Notepad. All rights reserved.</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" onclick="closeModal('aboutModal')">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const notepad = document.getElementById('notepad');
+        const homeContent = document.getElementById('homeContent');
+        const statusBar = document.getElementById('statusBar');
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved content if available
+            const savedContent = localStorage.getItem('notepadContent');
+            if (savedContent) {
+                notepad.value = savedContent;
+            }
+            
+            // Set up auto-save
+            notepad.addEventListener('input', function() {
+                localStorage.setItem('notepadContent', notepad.value);
+                updateStatusBar();
+            });
+            
+            // Set up cursor position tracking
+            notepad.addEventListener('click', updateStatusBar);
+            notepad.addEventListener('keyup', updateStatusBar);
+            
+            // Hide home content if there's text in the editor
+            if (notepad.value.trim() !== '') {
+                hideHome();
+            }
+        });
+        
+        // Home content functions
+        function showHome() {
+            homeContent.style.display = 'block';
+        }
+        
+        function hideHome() {
+            homeContent.style.display = 'none';
+            notepad.focus();
+        }
+        
+        // Modal functions
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // File operations
+        function newDocument() {
+            if (confirm('Create new document? Any unsaved changes will be lost.')) {
+                notepad.value = '';
+                localStorage.removeItem('notepadContent');
+                updateStatusBar();
+            }
+        }
+        
+        function newWindow() {
+            window.open(window.location.href, '_blank');
+        }
+        
+        function openFile() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.txt,.html,.css,.js,.xml,.json';
+            
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    notepad.value = e.target.result;
+                    updateStatusBar();
+                    hideHome();
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+        
+        function saveFile() {
+            downloadFile(notepad.value, 'document.txt', 'text/plain');
+        }
+        
+        function saveAsFile() {
+            const fileName = document.getElementById('fileName').value;
+            downloadFile(notepad.value, fileName, 'text/plain');
+            closeModal('saveAsModal');
+        }
+        
+        function downloadFile(content, fileName, contentType) {
+            const blob = new Blob([content], { type: contentType });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            
+            URL.revokeObjectURL(url);
+        }
+        
+        function printDocument() {
+            window.print();
+        }
+        
+        function exit() {
+            if (confirm('Are you sure you want to exit?')) {
+                // Can't close the window if it wasn't opened by script
+                if (window.history.length > 1) {
+                    window.close();
+                } else {
+                    alert('You can close this tab or window to exit.');
+                }
+            }
+        }
+        
+        // Edit operations
+        function undo() {
+            document.execCommand('undo');
+        }
+        
+        function cut() {
+            document.execCommand('cut');
+        }
+        
+        function copy() {
+            document.execCommand('copy');
+        }
+        
+        function paste() {
+            document.execCommand('paste');
+        }
+        
+        function deleteText() {
+            document.execCommand('delete');
+        }
+        
+        function findText() {
+            const findText = document.getElementById('findText').value;
+            const matchCase = document.getElementById('matchCase').checked;
+            
+            if (!findText) {
+                alert('Please enter text to find.');
+                return;
+            }
+            
+            const text = notepad.value;
+            let index = -1;
+            
+            if (matchCase) {
+                index = text.indexOf(findText, notepad.selectionEnd);
+            } else {
+                index = text.toLowerCase().indexOf(findText.toLowerCase(), notepad.selectionEnd);
+            }
+            
+            if (index === -1) {
+                alert('Cannot find "' + findText + '"');
+                return;
+            }
+            
+            notepad.focus();
+            notepad.setSelectionRange(index, index + findText.length);
+            updateStatusBar();
+        }
+        
+        function findNext() {
+            if (document.getElementById('findText').value) {
+                findText();
+            } else {
+                showModal('findModal');
+            }
+        }
+        
+        function selectAll() {
+            notepad.focus();
+            notepad.select();
+            updateStatusBar();
+        }
+        
+        function insertDateTime() {
+            const now = new Date();
+            notepad.focus();
+            document.execCommand('insertText', false, now.toLocaleString());
+        }
+        
+        // Format operations
+        function toggleWordWrap() {
+            notepad.style.whiteSpace = notepad.style.whiteSpace === 'nowrap' ? 'pre-wrap' : 'nowrap';
+        }
+        
+        // View operations
+        let zoomLevel = 100;
+        
+        function zoomIn() {
+            if (zoomLevel < 150) {
+                zoomLevel += 10;
+                updateZoom();
+            }
+        }
+        
+        function zoomOut() {
+            if (zoomLevel > 50) {
+                zoomLevel -= 10;
+                updateZoom();
+            }
+        }
+        
+        function zoomReset() {
+            zoomLevel = 100;
+            updateZoom();
+        }
+        
+        function updateZoom() {
+            notepad.style.fontSize = (14 * zoomLevel / 100) + 'px';
+            document.querySelector('#statusBar div:nth-child(2)').textContent = zoomLevel + '%';
+        }
+        
+        function toggleStatusBar() {
+            statusBar.style.display = statusBar.style.display === 'none' ? 'flex' : 'none';
+        }
+        
+        // Help operations
+        function showHelp() {
+            alert('Web Notepad Help\n\nFor assistance, please visit our website or check the documentation.');
+        }
+        
+        // Status bar update
+        function updateStatusBar() {
+            const text = notepad.value;
+            const cursorPos = notepad.selectionStart;
+            
+            // Calculate line and column
+            const textUpToCursor = text.substring(0, cursorPos);
+            const lines = textUpToCursor.split('\n');
+            const line = lines.length;
+            const col = lines[lines.length - 1].length + 1;
+            
+            document.querySelector('#statusBar div:first-child').textContent = `Ln ${line}, Col ${col}`;
+        }
+        
+        // Page setup modal (simplified)
+        function showPageSetup() {
+            alert('Page Setup functionality would typically allow you to configure printer settings. In this web version, your browser print settings will be used.');
+        }
+    </script>
+</body>
+  </html>
