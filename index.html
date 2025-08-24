@@ -1,68 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- ✅ Google Search Console Verification -->
-  <meta name="google-site-verification" content="ybbwv6IcW7DBBdT5sBFX-Et9VM2snOJkkr3RmzeSpjg" />
-
-  <!-- ✅ Title & Meta -->
-  <title>Web Notepad - Free Online Text Editor | Notepad for Web</title>
-  <meta name="description" content="Free online Notepad text editor with all desktop features. Create, edit, and save text files directly in your browser. No installation needed.">
-  <meta name="keywords" content="online notepad, desktop like Notepad in mobile, web notepad, text editor, free notepad, online text editor, notepad web version, notepad online, free text editor, browser notepad, notepad app">
-  <meta name="author" content="Web Notepad">
-  <link rel="canonical" href="https://new-version-of-notepad.vercel.app/" />
-
-  <!-- ✅ Open Graph (Facebook, LinkedIn) -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Web Notepad - Free Online Text Editor">
-  <meta property="og:description" content="Full-featured online Notepad with all desktop functionality. Works directly in your browser with no installation required.">
-  <meta property="og:url" content="https://new-version-of-notepad.vercel.app/" />
-  <meta property="og:image" content="https://new-version-of-notepad.vercel.app/preview.png" />
-  <meta property="og:site_name" content="Web Notepad" />
-
-  <!-- ✅ Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Web Notepad - Free Online Text Editor">
-  <meta name="twitter:description" content="Free online Notepad text editor with all desktop features. Edit and save files directly in your browser.">
-  <meta name="twitter:image" content="https://new-version-of-notepad.vercel.app/preview.png">
-
-  <!-- ✅ Favicon -->
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-  <!-- ✅ Styles (basic reset) -->
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Notepad - Free Online Text Editor | Notepad for Web</title>
+    <meta name="description" content="Free online Notepad text editor with all desktop features. Create, edit, and save text files directly in your browser. No installation needed.">
+    <meta name="keywords" content="online notepad, desktop like Notepad in mobile, web notepad, text editor, free notepad, online text editor, notepad web version, notepad online, free text editor, browser notepad, notepad app">
+    <meta name="author" content="Web Notepad">
+    <meta property="og:title" content="Web Notepad - Free Online Text Editor">
+    <meta property="og:description" content="Full-featured online Notepad with all desktop functionality. Works directly in your browser with no installation required.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://new-version-of-notepad.vercel.app/">
+    <meta property="og:image" content="https://new-version-of-notepad.vercel.app/preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Web Notepad - Free Online Text Editor">
+    <meta name="twitter:description" content="Full-featured online Notepad with all desktop functionality.">
+    <meta name="twitter:image" content="https://new-version-of-notepad.vercel.app/preview.jpg">
+    <link rel="canonical" href="https://new-version-of-notepad.vercel.app/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Web Notepad",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web Browser",
+      "description": "Free online Notepad text editor with all desktop features",
+      "url": "https://new-version-of-notepad.vercel.app/",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
     }
-  </style>
-
-  <!-- ✅ Schema Markup (Rich Snippets for Google) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Web Notepad",
-    "url": "https://new-version-of-notepad.vercel.app/",
-    "image": "https://new-version-of-notepad.vercel.app/preview.png",
-    "author": {
-      "@type": "Organization",
-      "name": "Web Notepad"
-    },
-    "applicationCategory": "ProductivityApplication",
-    "operatingSystem": "Any",
-    "description": "A free online Notepad text editor with all desktop features. Create, edit, and save text files directly in your browser with no installation.",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
-  }
-  </script>
-</head>
+    </script>
     <style>
         * {
             margin: 0;
@@ -197,14 +168,14 @@
             line-height: 1.8;
         }
         
-        .home-content h2 {
+        .home-content h1 {
             color: #2c3e50;
             margin-bottom: 15px;
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
         }
         
-        .home-content h3 {
+        .home-content h2 {
             color: #3498db;
             margin: 20px 0 10px;
         }
@@ -377,6 +348,26 @@
             color: #3498db;
             text-decoration: none;
         }
+        
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .tool-links a {
+            background: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #3498db;
+            transition: background 0.3s;
+        }
+        
+        .tool-links a:hover {
+            background: #e0e0e0;
+        }
     </style>
 </head>
 <body>
@@ -468,44 +459,53 @@
         </div>
         
         <div class="home-content" id="homeContent">
-            <h2>Welcome to Web Notepad - Your Free Online Text Editor</h2>
-            <p>Web Notepad is a free, full-featured text editor that works directly in your web browser. It includes all the functionality of the classic Windows Notepad application, plus additional features that make it perfect for editing code, taking notes, or writing documents.</p>
+            <h1>Web Notepad - Your Free Online Text Editor</h1>
+            <p>Welcome to Web Notepad, the most versatile and user-friendly online text editor available. Our tool provides a complete desktop-like notepad experience directly in your web browser, with no downloads or installations required. Whether you need to jot down quick notes, edit code, or create documents, Web Notepad offers all the functionality you need in a clean, intuitive interface.</p>
             
-            <h3>How to Use Web Notepad</h3>
-            <p>Getting started with Web Notepad is simple:</p>
+            <h2>How to Use Web Notepad</h2>
+            <p>Getting started with Web Notepad is simple and straightforward:</p>
             <ol>
-                <li>Start typing in the main editor area</li>
-                <li>Use the menu options to access all Notepad features</li>
-                <li>Save your work directly to your computer</li>
-                <li>Open existing text files from your device</li>
+                <li>Begin typing in the main editor area - your content is automatically saved as you type</li>
+                <li>Use the comprehensive menu options to access all Notepad features</li>
+                <li>Save your work directly to your computer in various formats</li>
+                <li>Open existing text files from your device for editing</li>
+                <li>Utilize advanced features like find/replace, font customization, and encoding options</li>
             </ol>
             
             <div class="features">
                 <div class="feature-card">
-                    <h3>File Operations</h3>
-                    <p>Create new documents, open existing files, save your work in various formats, and print documents directly from your browser.</p>
+                    <h3>Complete File Operations</h3>
+                    <p>Create new documents, open existing files, save your work in multiple formats (TXT, HTML, CSS, JS, XML, JSON), and print documents directly from your browser with our comprehensive file management system.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <h3>Text Editing</h3>
-                    <p>Cut, copy, paste, find, replace, and use all the standard text editing features you expect from a professional text editor.</p>
+                    <h3>Advanced Text Editing</h3>
+                    <p>Cut, copy, paste, find, replace, and use all the standard text editing features you expect from a professional text editor, plus additional capabilities like line numbering and encoding conversion.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <h3>Formatting Options</h3>
-                    <p>Toggle word wrap, change fonts, adjust zoom levels, and customize your editing experience to suit your preferences.</p>
+                    <h3>Custom Formatting Options</h3>
+                    <p>Toggle word wrap, change fonts and sizes, adjust zoom levels, switch between encoding formats, and customize your editing experience to suit your specific preferences and workflow requirements.</p>
                 </div>
             </div>
             
-            <h3>Advanced Features</h3>
-            <p>Web Notepad also includes advanced features like:</p>
+            <h2>Advanced Features</h2>
+            <p>Web Notepad includes powerful features beyond basic text editing:</p>
             <ul>
-                <li>Multiple encoding support (ANSI, UTF-8, UTF-16)</li>
-                <li>Line ending conversion (Windows, Unix, Mac)</li>
-                <li>Go to specific line numbers</li>
-                <li>Insert current date/time with one click</li>
-                <li>Status bar with document statistics</li>
+                <li>Multiple encoding support (ANSI, UTF-8, UTF-8 with BOM, UTF-16 LE/BE)</li>
+                <li>Line ending conversion between Windows (CRLF), Unix (LF), and Mac (CR) formats</li>
+                <li>Go to specific line numbers for efficient code navigation</li>
+                <li>Insert current date/time with a single click</li>
+                <li>Status bar with real-time document statistics and encoding information</li>
+                <li>Zoom functionality for better readability</li>
+                <li>Full print support with page setup options</li>
             </ul>
+            
+            <div class="tool-links">
+                <a href="/features.html">Explore All Features</a>
+                <a href="/faq.html">Frequently Asked Questions</a>
+                <a href="/about.html">About & Privacy Policy</a>
+            </div>
             
             <a href="#" class="btn" onclick="hideHome()">Start Using Web Notepad</a>
         </div>
@@ -515,34 +515,37 @@
             
             <div class="faq-item">
                 <div class="faq-question">Is Web Notepad completely free to use?</div>
-                <p>Yes, Web Notepad is completely free. There are no hidden fees or subscription costs. You can use all features without any limitations.</p>
+                <p>Yes, Web Notepad is completely free with no hidden fees or subscription costs. You can use all features without any limitations, restrictions, or watermarks. We believe in providing accessible tools for everyone.</p>
             </div>
             
             <div class="faq-item">
                 <div class="faq-question">Does Web Notepad work on mobile devices?</div>
-                <p>Yes, Web Notepad is fully responsive and works on smartphones, tablets, and desktop computers. The interface adjusts to fit your screen size.</p>
+                <p>Yes, Web Notepad is fully responsive and works seamlessly on smartphones, tablets, and desktop computers. The interface automatically adjusts to fit your screen size, providing an optimal editing experience on any device.</p>
             </div>
             
             <div class="faq-item">
                 <div class="faq-question">Can I open and save files with Web Notepad?</div>
-                <p>Yes, you can open text files from your device and save your work directly to your computer. All processing happens in your browser for maximum privacy.</p>
+                <p>Absolutely. You can open text files from your device and save your work directly to your computer. All processing happens locally in your browser for maximum privacy and security - your files never leave your device.</p>
             </div>
             
             <div class="faq-item">
                 <div class="faq-question">What file formats does Web Notepad support?</div>
-                <p>Web Notepad supports .txt, .html, .css, .js, .xml, .json, and many other text-based file formats. You can also save files with different encodings.</p>
+                <p>Web Notepad supports .txt, .html, .css, .js, .xml, .json, and many other text-based file formats. You can also save files with different encodings to ensure compatibility with various systems and applications.</p>
             </div>
             
             <div class="faq-item">
                 <div class="faq-question">How does Web Notepad compare to desktop Notepad?</div>
-                <p>Web Notepad includes all the features of Windows Notepad plus additional functionality like zoom controls, multiple encodings, and a more modern interface.</p>
+                <p>Web Notepad includes all the features of Windows Notepad plus additional functionality like zoom controls, multiple encodings, a more modern interface, and cross-platform compatibility. It offers the familiarity of desktop Notepad with the convenience of web accessibility.</p>
             </div>
+            
+            <a href="/faq.html" class="btn">View All FAQs</a>
         </div>
         
         <footer>
             <p>Web Notepad &copy; 2023 - Free Online Text Editor | All Rights Reserved</p>
             <p>This is a free service. No registration required. No data stored on our servers.</p>
             <p>Web Notepad - Your free online text editor for quick notes, code editing, and document creation.</p>
+            <p><a href="/sitemap.html">Sitemap</a> | <a href="/about.html">About & Privacy</a></p>
         </footer>
     </div>
     
@@ -621,9 +624,9 @@
                 <span class="close" onclick="closeModal('aboutModal')">&times;</span>
             </div>
             <div>
-                <p>Web Notepad Version 1.0</p>
-                <p>A free online text editor with all the features of Windows Notepad.</p>
-                <p>This application runs entirely in your browser - no data is sent to any server.</p>
+                <p>Web Notepad Version 2.1</p>
+                <p>A free online text editor with all the features of Windows Notepad plus additional capabilities for modern workflows.</p>
+                <p>This application runs entirely in your browser - no data is sent to any server, ensuring complete privacy for your documents.</p>
                 <p>&copy; 2023 Web Notepad. All rights reserved.</p>
             </div>
             <div class="modal-buttons">
